@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Hangman</string>
+    <string name="btn_hangman">Hangman</string>
+    <string name="btn_settings">Settings</string>
+    <string name="message_Hang">Play Hangman</string>
+    <string name="message_settings">User Settings</string>
+</resources>
