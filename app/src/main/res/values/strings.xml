@@ -1,9 +1,22 @@
 <resources>
+
     <string name="app_name">Hangman</string>
-    <string name="btn_hangman">Hangman</string>
-    <string name="btn_settings">Settings</string>
+
+<!--Buttons and their strings-->
+
+    <string name="btn_hangman">Play</string>
     <string name="message_Hang">Play Hangman</string>
+
+
+    <string name="btn_settings">Settings</string>
+    <string name="message_settings">User Settings</string>
+
+    <string name="btn_wordoftheday">Word of the Day</string>
+    <string name="message_wotd">Play the Word of the Day</string>
+
+
     <string name="btn_play_again">Play Again</string>
     <string name="btn_define">Define</string>
     <string name="btn_menu">Menu</string>
+
 </resources>
