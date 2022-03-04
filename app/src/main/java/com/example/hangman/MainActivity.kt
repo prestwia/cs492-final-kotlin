@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this@MainActivity, R.string.message_Hang, Toast.LENGTH_SHORT).show()
         }
         button_Settings?.setOnClickListener(){
-            Toast.makeText(this@MainActivity, R.string.message_settings, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@MainActivity, R.string.btn_settings, Toast.LENGTH_SHORT).show()
         }
     }
 }
