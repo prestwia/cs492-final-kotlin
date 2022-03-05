@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/pref_category_hangman">
+        <SeekBarPreference
+            android:title="@string/pref_tries_title"
+            android:key="@string/pref_tries_key"
+            android:max="12"
+            app:min="6"
+            app:showSeekBarValue="true"/>
+
+        <SeekBarPreference
+            android:title="@string/pref_letter_count_title"
+            android:key="@string/pref_letter_count_key"
+            android:max="10"
+            app:min="5"
+            app:showSeekBarValue="true"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>
