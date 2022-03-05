@@ -1,5 +1,6 @@
 package com.example.hangman
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -20,7 +21,8 @@ class EndScreenActivity : AppCompatActivity() {
             Toast.makeText(this@EndScreenActivity, R.string.btn_define, Toast.LENGTH_SHORT).show()
         }
         button_menu?.setOnClickListener(){
-            Toast.makeText(this@EndScreenActivity, R.string.btn_menu, Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }

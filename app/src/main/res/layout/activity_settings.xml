@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/mountainbackground_1"
     android:id="@+id/settings_fragment"
     android:name="com.example.hangman.ui.SettingsFragment"
     tools:context=".ui.SettingsActivity"/>

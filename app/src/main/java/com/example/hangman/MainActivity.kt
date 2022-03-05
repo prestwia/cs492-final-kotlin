@@ -21,7 +21,9 @@ class MainActivity : AppCompatActivity() {
         val button_wotd = findViewById<Button>(R.id.button_wotd)
 
         button_Play?.setOnClickListener(){
-            Toast.makeText(this@MainActivity, R.string.message_Hang, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this@MainActivity, R.string.message_Hang, Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, EndScreenActivity::class.java)
+            startActivity(intent)
         }
 
         button_Settings?.setOnClickListener(){
