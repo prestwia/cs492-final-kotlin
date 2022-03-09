@@ -1,17 +1,12 @@
-package com.example.hangman
+package com.example.hangman.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.example.hangman.ui.SettingsActivity
-import androidx.appcompat.app.ActionBar
-import com.example.hangman.ui.WordViewModel
+import com.example.hangman.R
 
 const val WORDNIK_API_KEY = "4zk263i5zxo3f2awyz8g2ms9b3oo5rdd15m5tv7fbilpdcguk"
 

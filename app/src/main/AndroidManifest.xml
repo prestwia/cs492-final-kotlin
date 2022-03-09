@@ -14,12 +14,12 @@
         <activity
             android:name=".ui.SettingsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>      
+            android:parentActivityName=".ui.MainActivity"/>
         <activity
-            android:name=".EndScreenActivity"
+            android:name=".ui.EndScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

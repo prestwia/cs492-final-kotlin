@@ -1,4 +1,4 @@
-package com.example.hangman
+package com.example.hangman.ui
 
 import android.app.SearchManager
 import android.content.ActivityNotFoundException
@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import com.example.hangman.ui.MainActivity
+import com.example.hangman.R
 
 class EndScreenActivity : AppCompatActivity() {
 
