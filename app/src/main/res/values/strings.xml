@@ -31,5 +31,8 @@
     <string name="btn_define">Define</string>
     <string name="btn_menu">Menu</string>
 
+    <string name="search_error">No web browser installed to search</string>
+    <string name="definition">%1$s definition</string>
+
 
 </resources>
