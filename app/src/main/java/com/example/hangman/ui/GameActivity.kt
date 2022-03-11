@@ -8,6 +8,7 @@ import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -16,10 +17,16 @@ import androidx.preference.PreferenceManager
 import com.example.hangman.R
 import com.example.hangman.data.LoadingStatus
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.snackbar.Snackbar
 import org.w3c.dom.Text
 
 
 class GameActivity: AppCompatActivity() {
+
+    private lateinit var guessET : EditText
+    private lateinit var guessBtn : Button
+    private lateinit var displayTV : TextView
+    private lateinit var displayIncorrectTV : TextView
 
     //Loading and error variables
     private lateinit var searchErrorTV: TextView
@@ -28,9 +35,13 @@ class GameActivity: AppCompatActivity() {
     //Viewmodel
     private val viewModel : WordViewModel by viewModels()
 
+
     //API and display strings
-    private lateinit var apiWord : String //will need to be lateinit when set to the api response
+    private lateinit var answer : String
     private lateinit var display : String
+    private var incorrectGuesses = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +55,11 @@ class GameActivity: AppCompatActivity() {
         var button_define = findViewById<Button>(R.id.btn_define)
         var button_menu = findViewById<Button>(R.id.btn_menu)
 
-        //Textview of the display word
-        val displayTV : TextView = findViewById(R.id.display_word)
+        val newGameButton: Button = findViewById(R.id.new_game_button)
+        displayTV = findViewById(R.id.display_word)
+        guessBtn = findViewById(R.id.guess_button)
+        guessET = findViewById(R.id.guess_text)
+        displayIncorrectTV = findViewById(R.id.incorrect_guesses)
 
         //Set Loading & Error variables
         searchErrorTV = findViewById(R.id.tv_search_error)
@@ -68,7 +82,9 @@ class GameActivity: AppCompatActivity() {
         viewModel.wordResult.observe(this) { word ->
             if(word != null){
                 Log.d("tag", word)
-                apiWord = word
+                
+                answer = word
+
                 display = toUnderscore(word)
                 Log.d("tag-display", display)
                 displayTV.text = display
@@ -131,7 +147,7 @@ class GameActivity: AppCompatActivity() {
                 putExtra(
                     SearchManager.QUERY, getString(
                     R.string.definition,
-                    apiWord
+                    answer
                 ))
             }
             try{
@@ -147,7 +163,51 @@ class GameActivity: AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
+
+        guessBtn.setOnClickListener{
+            var guess = guessET.text.toString()
+            if (guess != "") {
+                make_guess(guess)
+                guessET.getText().clear();
+            }
+            else {
+                Toast.makeText(this, "Enter a guess (Letter)", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
+
+    private fun make_guess(guess : String) {
+        Log.d("tag-guess", "Guess: $guess")
+        if (answer.contains(guess)) {
+            var index = mutableListOf<Int>()
+            /* get indexes of all chars that are the same as guess */
+            for (i in answer.indices) {
+                if (answer[i].toString() == guess) {
+                    index.add(i)
+                }
+            }
+
+            for (i in index) {
+                Log.d("tag-guess", "Index: $i")
+            }
+
+            var new_display = display
+            /* construct new display string */
+            for (i in index) {
+                 new_display= new_display.substring(0, i) + guess + new_display.substring(i + 1)
+            }
+            display = new_display
+            displayTV.text = display
+            Log.d("tag-guess", "New String: $new_display")
+        }
+        else {
+            incorrectGuesses += guess
+            displayIncorrectTV.text = incorrectGuesses
+            Log.d("tag-guess", "Incorrect: $incorrectGuesses")
+        }
+    }
+
 
     private fun toUnderscore(original : String) : String {
         val length = original.length
