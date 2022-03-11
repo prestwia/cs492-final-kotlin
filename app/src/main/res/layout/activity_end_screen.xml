@@ -5,41 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mountainbackground_1"
-    android:gravity="center"
     android:orientation="vertical"
-    tools:context="ui.MainActivity">
+    tools:context=".ui.EndScreenActivity">
 
-    <Button
-        android:id="@+id/btn_play_again"
-        android:layout_width="200dp"
-        android:layout_height="68dp"
-        android:textSize="16dp"
-        android:text="@string/btn_play_again"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="?attr/colorPrimary"-->
+<!--        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar" />-->
 
-    <Button
-        android:id="@+id/btn_define"
-        android:layout_width="200dp"
-        android:layout_height="68dp"
-        android:textSize="16dp"
-        android:text="@string/btn_define"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/game_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Hangman"
+        android:textColor="@color/black"
+        android:fontFamily=""
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3" />
 
-    <Button
-        android:id="@+id/btn_menu"
-        android:layout_width="200dp"
-        android:layout_height="68dp"
-        android:textSize="16dp"
-        android:text="@string/btn_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/end_screen_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_play_again"
+            android:layout_width="200dp"
+            android:layout_height="68dp"
+            android:textSize="16dp"
+            android:text="@string/btn_play_again"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_define"
+            android:layout_width="200dp"
+            android:layout_height="68dp"
+            android:textSize="16dp"
+            android:text="@string/btn_define"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_menu"
+            android:layout_width="200dp"
+            android:layout_height="68dp"
+            android:textSize="16dp"
+            android:text="@string/btn_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
 
 </LinearLayout>

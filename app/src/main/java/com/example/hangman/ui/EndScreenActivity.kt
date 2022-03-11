@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.example.hangman.ui.MainActivity
 import com.example.hangman.R
 
@@ -19,6 +20,9 @@ class EndScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_end_screen)
+
+//        val toolbar: Toolbar = findViewById(R.id.toolbar)
+//        setSupportActionBar(toolbar)
 
         val button_play_again = findViewById<Button>(R.id.btn_play_again)
         val button_define = findViewById<Button>(R.id.btn_define)
@@ -44,6 +48,7 @@ class EndScreenActivity : AppCompatActivity() {
         button_menu?.setOnClickListener(){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 }

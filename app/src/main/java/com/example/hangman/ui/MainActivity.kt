@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.activity.viewModels
 import com.example.hangman.R
 
@@ -17,8 +18,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button_Play = findViewById<Button>(R.id.button_play)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+//        val toolbar: Toolbar = findViewById(R.id.toolbar)
+//        setSupportActionBar(toolbar)
 
+
+        val button_Play = findViewById<Button>(R.id.button_play)
         val button_Settings = findViewById<Button>(R.id.button_settings)
         val button_wotd = findViewById<Button>(R.id.button_wotd)
 
@@ -33,13 +38,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         button_Settings?.setOnClickListener(){
-//            Toast.makeText(this@MainActivity, R.string.message_settings, Toast.LENGTH_SHORT).show()
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
         }
         button_wotd?.setOnClickListener(){
-            Toast.makeText(this@MainActivity, R.string.message_wotd, Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, EndScreenActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 }
