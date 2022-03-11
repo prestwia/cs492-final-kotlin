@@ -41,8 +41,6 @@ class GameActivity: AppCompatActivity() {
     private lateinit var display : String
     private var incorrectGuesses = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +53,13 @@ class GameActivity: AppCompatActivity() {
         var button_define = findViewById<Button>(R.id.btn_define)
         var button_menu = findViewById<Button>(R.id.btn_menu)
 
-        val newGameButton: Button = findViewById(R.id.new_game_button)
         displayTV = findViewById(R.id.display_word)
         guessBtn = findViewById(R.id.guess_button)
         guessET = findViewById(R.id.guess_text)
         displayIncorrectTV = findViewById(R.id.incorrect_guesses)
+
+        //Textview of the display word
+        val displayTV : TextView = findViewById(R.id.display_word)
 
         //Set Loading & Error variables
         searchErrorTV = findViewById(R.id.tv_search_error)
@@ -122,13 +122,34 @@ class GameActivity: AppCompatActivity() {
             val intent = Intent(this, GameActivity::class.java)
             finish()
             startActivity(intent)
+
         }
         button_define?.setOnClickListener(){
             val intent = Intent(Intent.ACTION_WEB_SEARCH).apply {
                 putExtra(
                     SearchManager.QUERY, getString(
                     R.string.definition,
-                    apiWord
+                    answer
+                ))
+            }
+            try{
+                startActivity(intent)
+            }catch(e: ActivityNotFoundException) {
+                Toast.makeText(this@GameActivity, getString(R.string.search_error), Toast.LENGTH_SHORT).show()
+            }
+        }
+        button_menu?.setOnClickListener(){
+            val intent = Intent(this, MainActivity::class.java)
+            finish()
+            startActivity(intent)
+
+        }
+        button_define?.setOnClickListener(){
+            val intent = Intent(Intent.ACTION_WEB_SEARCH).apply {
+                putExtra(
+                    SearchManager.QUERY, getString(
+                    R.string.definition,
+                    answer
                 ))
             }
             try{
