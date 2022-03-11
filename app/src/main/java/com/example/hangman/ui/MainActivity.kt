@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 //            Toast.makeText(this@MainActivity, R.string.message_Hang, Toast.LENGTH_SHORT).show()
 //            val intent = Intent(this, EndScreenActivity::class.java)
 //            startActivity(intent)
+            val intent = Intent(this, GameActivity::class.java)
+            startActivity(intent)
 
             viewModel.loadReqResult(7, WORDNIK_API_KEY)
         }
