@@ -8,19 +8,12 @@
     android:orientation="vertical"
     tools:context="ui.MainActivity">
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="?attr/colorPrimary"-->
-<!--        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar" />-->
-
     <TextView
         android:id="@+id/game_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="Hangman"
+        android:text="@string/app_name"
         android:textColor="@color/black"
         android:fontFamily=""
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3" />
@@ -36,7 +29,7 @@
             android:id="@+id/button_play"
             android:layout_width="200dp"
             android:layout_height="68dp"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:text="@string/btn_hangman"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +40,7 @@
             android:id="@+id/button_wotd"
             android:layout_width="200dp"
             android:layout_height="68dp"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:text="@string/btn_wordoftheday"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +51,7 @@
             android:id="@+id/button_settings"
             android:layout_width="200dp"
             android:layout_height="68dp"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:text="@string/btn_settings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,9 +59,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
-
-
-
-
 
 </LinearLayout>

@@ -28,15 +28,17 @@
 <!--    Game activity strings-->
 
     <string name="end_game">End game</string>
-
-<!--    End game activity strings    -->
+    <string name="guess_prompt">Guess: </string>
+    <string name="guess_button">Make Guess</string>
+    <string name="incorrect_guesses">Incorrect Guesses: </string>
 
     <string name="btn_play_again">Play Again</string>
     <string name="btn_define">Define</string>
     <string name="btn_menu">Menu</string>
 
-    <string name="search_error">No web browser installed to search</string>
+    <string name="api_error">API error, try again</string>
     <string name="definition">%1$s definition</string>
 
+    <string name="search_error">No browser installed on device.</string>
 
 </resources>

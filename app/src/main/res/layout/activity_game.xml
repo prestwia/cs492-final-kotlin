@@ -22,7 +22,7 @@
         android:id="@+id/guess_prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Guess: "
+        android:text="@string/guess_prompt"
         app:layout_constraintTop_toBottomOf="@id/display_word"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
@@ -39,7 +39,7 @@
         android:id="@+id/incorrect_guess_prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Incorrect Guesses: "
+        android:text="@string/incorrect_guesses"
         app:layout_constraintTop_toBottomOf="@id/guess_text"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Make Guess"
+        android:text="@string/guess_button"
         app:layout_constraintStart_toStartOf="@id/guess_text"
         app:layout_constraintTop_toBottomOf="@id/guess_text"
         tools:ignore="MissingConstraints"
@@ -76,7 +76,7 @@
             android:id="@+id/btn_play_again"
             android:layout_width="200dp"
             android:layout_height="68dp"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:text="@string/btn_play_again"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
             android:id="@+id/btn_define"
             android:layout_width="200dp"
             android:layout_height="68dp"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:text="@string/btn_define"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
             android:id="@+id/btn_menu"
             android:layout_width="200dp"
             android:layout_height="68dp"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:text="@string/btn_menu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -117,14 +117,14 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/tv_search_error"
+            android:id="@+id/tv_api_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="?attr/colorError"
             android:visibility="invisible"
-            android:text="@string/search_error" />
+            android:text="@string/api_error" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/loading_indicator"
