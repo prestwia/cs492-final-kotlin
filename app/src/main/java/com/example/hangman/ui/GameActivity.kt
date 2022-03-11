@@ -1,5 +1,7 @@
 package com.example.hangman.ui
 
+import android.app.SearchManager
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -7,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
@@ -17,19 +20,28 @@ import org.w3c.dom.Text
 
 
 class GameActivity: AppCompatActivity() {
-    private lateinit var searchErrorTV: TextView
 
+    //Loading and error variables
+    private lateinit var searchErrorTV: TextView
     private lateinit var loadingIndicator: CircularProgressIndicator
+
+    //Viewmodel
     private val viewModel : WordViewModel by viewModels()
 
+    //API and display strings
+    private lateinit var apiWord : String //will need to be lateinit when set to the api response
     private lateinit var display : String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        val newGameButton: Button = findViewById(R.id.new_game_button)
+        //Buttons
+        var button_play_again = findViewById<Button>(R.id.btn_play_again)
+        var button_define = findViewById<Button>(R.id.btn_define)
+        var button_menu = findViewById<Button>(R.id.btn_menu)
+
         val displayTV : TextView = findViewById(R.id.display_word)
 
         searchErrorTV = findViewById(R.id.tv_search_error)
@@ -51,6 +63,7 @@ class GameActivity: AppCompatActivity() {
         viewModel.wordResult.observe(this) { word ->
             if(word != null){
                 Log.d("tag", word)
+                apiWord = word
                 display = toUnderscore(word)
                 Log.d("tag-display", display)
                 displayTV.text = display
@@ -60,25 +73,52 @@ class GameActivity: AppCompatActivity() {
         viewModel.loadingStatus.observe(this) { uiState ->
             when (uiState) {
                 LoadingStatus.LOADING -> {
-                    newGameButton.visibility = View.INVISIBLE
+                    button_play_again.visibility = View.INVISIBLE
+                    button_define.visibility = View.INVISIBLE
+                    button_menu.visibility = View.INVISIBLE
                     loadingIndicator.visibility = View.VISIBLE
                     searchErrorTV.visibility = View.INVISIBLE
                 }
                 LoadingStatus.ERROR -> {
-                    newGameButton.visibility = View.VISIBLE
+                    button_play_again.visibility = View.VISIBLE
+                    button_define.visibility = View.VISIBLE
+                    button_menu.visibility = View.VISIBLE
                     loadingIndicator.visibility = View.INVISIBLE
                     searchErrorTV.visibility = View.VISIBLE
                 }
                 else -> {
-                    newGameButton.visibility = View.VISIBLE
+                    button_play_again.visibility = View.VISIBLE
+                    button_define.visibility = View.VISIBLE
+                    button_menu.visibility = View.VISIBLE
                     loadingIndicator.visibility = View.INVISIBLE
                     searchErrorTV.visibility = View.INVISIBLE
                 }
             }
         }
 
-        newGameButton.setOnClickListener{
+        button_play_again?.setOnClickListener(){
             val intent = Intent(this, GameActivity::class.java)
+            finish()
+            startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+        button_define?.setOnClickListener(){
+            val intent = Intent(Intent.ACTION_WEB_SEARCH).apply {
+                putExtra(
+                    SearchManager.QUERY, getString(
+                    R.string.definition,
+                    apiWord
+                ))
+            }
+            try{
+                startActivity(intent)
+            }catch(e: ActivityNotFoundException) {
+                Toast.makeText(this@GameActivity, getString(R.string.search_error), Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        button_menu?.setOnClickListener(){
+            val intent = Intent(this, MainActivity::class.java)
             finish()
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
