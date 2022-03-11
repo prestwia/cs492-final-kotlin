@@ -13,8 +13,7 @@ import androidx.preference.PreferenceManager
 import com.example.hangman.R
 import com.example.hangman.data.LoadingStatus
 import com.google.android.material.progressindicator.CircularProgressIndicator
-
-
+import org.w3c.dom.Text
 
 
 class GameActivity: AppCompatActivity() {
@@ -23,12 +22,15 @@ class GameActivity: AppCompatActivity() {
     private lateinit var loadingIndicator: CircularProgressIndicator
     private val viewModel : WordViewModel by viewModels()
 
+    private lateinit var display : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
         val newGameButton: Button = findViewById(R.id.new_game_button)
+        val displayTV : TextView = findViewById(R.id.display_word)
 
         searchErrorTV = findViewById(R.id.tv_search_error)
         loadingIndicator = findViewById(R.id.loading_indicator)
@@ -49,6 +51,9 @@ class GameActivity: AppCompatActivity() {
         viewModel.wordResult.observe(this) { word ->
             if(word != null){
                 Log.d("tag", word)
+                display = toUnderscore(word)
+                Log.d("tag-display", display)
+                displayTV.text = display
             }
         }
 
@@ -80,5 +85,15 @@ class GameActivity: AppCompatActivity() {
         }
     }
 
+    private fun toUnderscore(original : String) : String {
+        val length = original.length
+        var temp : String = ""
+
+        for (i in 1..length) {
+            temp += "_"
+        }
+
+        return temp
+    }
 
 }

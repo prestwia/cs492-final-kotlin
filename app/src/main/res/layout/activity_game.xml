@@ -7,13 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.GameActivity">
 
-<!--    <TextView-->
-<!--        android:id="@+id/the_word"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"-->
-<!--        android:textColor="@color/black" />-->
+    <TextView
+        android:id="@+id/display_word"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+        android:textColor="@color/black"
+        android:letterSpacing= "0.2" />
 
 
     <Button
@@ -24,7 +25,8 @@
         android:text="@string/end_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <FrameLayout
         android:layout_width="match_parent"
