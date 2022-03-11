@@ -36,18 +36,23 @@ class GameActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+        //Fade when the user clicks "PLAY AGAIN"
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
         //Buttons
         var button_play_again = findViewById<Button>(R.id.btn_play_again)
         var button_define = findViewById<Button>(R.id.btn_define)
         var button_menu = findViewById<Button>(R.id.btn_menu)
 
+        //Textview of the display word
         val displayTV : TextView = findViewById(R.id.display_word)
 
+        //Set Loading & Error variables
         searchErrorTV = findViewById(R.id.tv_search_error)
         loadingIndicator = findViewById(R.id.loading_indicator)
 
-        //preference stuff
+        
+        //Preference stuff
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
         val gameTries = sharedPrefs.getInt(
             getString(R.string.pref_tries_key),
@@ -58,7 +63,7 @@ class GameActivity: AppCompatActivity() {
             5
         )
 
-        //api stuff
+        //Api stuff
         viewModel.loadReqResult(wordLength, WORDNIK_API_KEY)
         viewModel.wordResult.observe(this) { word ->
             if(word != null){
@@ -96,11 +101,30 @@ class GameActivity: AppCompatActivity() {
             }
         }
 
+        //Button listeners
         button_play_again?.setOnClickListener(){
             val intent = Intent(this, GameActivity::class.java)
             finish()
             startActivity(intent)
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+        button_define?.setOnClickListener(){
+            val intent = Intent(Intent.ACTION_WEB_SEARCH).apply {
+                putExtra(
+                    SearchManager.QUERY, getString(
+                    R.string.definition,
+                    apiWord
+                ))
+            }
+            try{
+                startActivity(intent)
+            }catch(e: ActivityNotFoundException) {
+                Toast.makeText(this@GameActivity, getString(R.string.search_error), Toast.LENGTH_SHORT).show()
+            }
+        }
+        button_menu?.setOnClickListener(){
+            val intent = Intent(this, MainActivity::class.java)
+            finish()
+            startActivity(intent)
         }
         button_define?.setOnClickListener(){
             val intent = Intent(Intent.ACTION_WEB_SEARCH).apply {
