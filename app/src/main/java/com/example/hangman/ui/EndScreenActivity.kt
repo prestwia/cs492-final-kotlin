@@ -21,8 +21,6 @@ class EndScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_end_screen)
 
-//        val toolbar: Toolbar = findViewById(R.id.toolbar)
-//        setSupportActionBar(toolbar)
 
         val button_play_again = findViewById<Button>(R.id.btn_play_again)
         val button_define = findViewById<Button>(R.id.btn_define)

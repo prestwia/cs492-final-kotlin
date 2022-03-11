@@ -9,6 +9,7 @@
             android:key="@string/pref_tries_key"
             android:max="12"
             app:min="6"
+            android:defaultValue="6"
             app:showSeekBarValue="true"/>
 
         <SeekBarPreference
@@ -16,6 +17,7 @@
             android:key="@string/pref_letter_count_key"
             android:max="10"
             app:min="5"
+            android:defaultValue="5"
             app:showSeekBarValue="true"/>
     </PreferenceCategory>
 
