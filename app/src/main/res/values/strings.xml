@@ -13,8 +13,6 @@
     <string name="btn_settings">Settings</string>
     <string name="message_settings">User Settings</string>
 
-    <string name="play_again">play again</string>
-
 <!--    Settings activity strings-->
 
     <string name="action_settings">Settings</string>
@@ -26,6 +24,10 @@
 
     <string name="pref_tries_key" translatable="false">tries</string>
     <string name="pref_letter_count_key" translatable="false">maxLength</string>
+
+<!--    Game activity strings-->
+
+    <string name="end_game">End game</string>
 
 <!--    End game activity strings    -->
 

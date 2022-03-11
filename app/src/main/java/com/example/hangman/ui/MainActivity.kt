@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         button_wotd?.setOnClickListener(){
-            val intent = Intent(this, EndScreenActivity::class.java)
+            val intent = Intent(this, GameActivity::class.java)
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }

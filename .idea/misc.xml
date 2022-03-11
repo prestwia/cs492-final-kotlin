@@ -3,14 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/migue/OneDrive/Desktop/cs492fresh/final-project-final-project-team-9/app/src/main/res/layout/activity_end_screen.xml" value="0.1524822695035461" />
-        <entry key="..\:/Users/migue/OneDrive/Desktop/cs492fresh/final-project-final-project-team-9/app/src/main/res/layout/activity_game.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/migue/OneDrive/Desktop/cs492fresh/final-project-final-project-team-9/app/src/main/res/layout/activity_main.xml" value="0.36186594202898553" />
         <entry key="..\:/Users/owl/Desktop/CS/CS492/Final/final-project-final-project-team-9/app/src/main/res/drawable/ic_action_settings.xml" value="0.211" />
+
         <entry key="..\:/Users/migue/OneDrive/Desktop/cs492fresh/final-project-final-project-team-9/app/src/main/res/layout/activity_settings.xml" value="0.1524822695035461" />
+
         <entry key="..\:/Users/owl/Desktop/CS/CS492/Final/final-project-final-project-team-9/app/src/main/res/layout/action_bar.xml" value="0.16621376811594202" />
         <entry key="..\:/Users/owl/Desktop/CS/CS492/Final/final-project-final-project-team-9/app/src/main/res/layout/action_bar_layout.xml" value="0.16621376811594202" />
         <entry key="..\:/Users/owl/Desktop/CS/CS492/Final/final-project-final-project-team-9/app/src/main/res/layout/activity_end_screen.xml" value="0.19972826086956522" />
+        <entry key="..\:/Users/owl/Desktop/CS/CS492/Final/final-project-final-project-team-9/app/src/main/res/layout/activity_game.xml" value="0.1721014492753623" />
         <entry key="..\:/Users/owl/Desktop/CS/CS492/Final/final-project-final-project-team-9/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/Users/owl/Desktop/CS/CS492/Final/final-project-final-project-team-9/app/src/main/res/layout/activity_settings.xml" value="0.16621376811594202" />
       </map>
