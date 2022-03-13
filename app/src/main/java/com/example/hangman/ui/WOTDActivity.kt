@@ -163,7 +163,7 @@ class WOTDActivity: AppCompatActivity() {
 
         //Button listeners
         buttonPlayAgain.setOnClickListener(){
-            val intent = Intent(this, WOTDActivity::class.java)
+            val intent = Intent(this, GameActivity::class.java)
             finish()
             startActivity(intent)
 
