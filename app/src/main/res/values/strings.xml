@@ -41,4 +41,7 @@
 
     <string name="search_error">No browser installed on device.</string>
 
+    <string name="win_msg">You Win!</string>
+    <string name="lose_msg">You Lose</string>
+
 </resources>
