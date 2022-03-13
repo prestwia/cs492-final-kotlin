@@ -19,6 +19,29 @@
         android:letterSpacing= "0.2" />
 
     <TextView
+        android:id="@+id/win_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You Win!"
+        android:textColor="#00FF00"
+        android:visibility="invisible"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/display_word"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"/>
+
+    <TextView
+        android:id="@+id/loss_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You Lose"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/display_word"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"/>
+
+    <TextView
         android:id="@+id/guess_prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

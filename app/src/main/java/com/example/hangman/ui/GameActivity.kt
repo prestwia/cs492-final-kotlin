@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -16,6 +17,7 @@ import androidx.preference.PreferenceManager
 import com.example.hangman.R
 import com.example.hangman.data.LoadingStatus
 import com.google.android.material.progressindicator.CircularProgressIndicator
+
 
 class GameActivity: AppCompatActivity() {
 
@@ -29,6 +31,8 @@ class GameActivity: AppCompatActivity() {
     private lateinit var buttonMenu : Button
     private lateinit var guessPrompt: TextView
     private lateinit var incorrectGuess: TextView
+    private lateinit var lossMsg: TextView
+    private lateinit var winMsg: TextView
 
     //Loading and error variables
     private lateinit var apiErrorTV: TextView
@@ -67,6 +71,9 @@ class GameActivity: AppCompatActivity() {
 
         //Textview of the display word
         val displayTV : TextView = findViewById(R.id.display_word)
+
+        winMsg = findViewById(R.id.win_msg)
+        lossMsg = findViewById(R.id.loss_msg)
 
         //Set Loading & Error variables
         apiErrorTV = findViewById(R.id.tv_api_error)
@@ -189,11 +196,18 @@ class GameActivity: AppCompatActivity() {
 
         guessBtn.setOnClickListener{
             val guess = guessET.text.toString()
+            // don't allow empty guess
             if (guess != "") {
-                makeGuess(guess)
-                // tries = 10
-                gameWinner(gameTries,answer, display);
-                guessET.getText().clear();
+                // don't allow user to re-guess letter
+                if (incorrectGuesses.contains(guess) || display.contains(guess)) {
+                    Toast.makeText(this, "Letter already guessed. Try Again", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    makeGuess(guess)
+                    // tries = 10
+                    gameWinner(gameTries,answer, display);
+                    guessET.getText().clear();
+                }
             }
             else {
                 Toast.makeText(this, "Enter a guess (Letter)", Toast.LENGTH_SHORT).show()
@@ -230,6 +244,8 @@ class GameActivity: AppCompatActivity() {
             buttonPlayAgain.visibility = View.VISIBLE
             buttonDefine.visibility = View.VISIBLE
             buttonMenu.visibility = View.VISIBLE
+
+            winMsg.visibility = View.VISIBLE
         } else {
             if (tries==0){
 
@@ -242,6 +258,8 @@ class GameActivity: AppCompatActivity() {
                 buttonPlayAgain.visibility = View.VISIBLE
                 buttonDefine.visibility = View.VISIBLE
                 buttonMenu.visibility = View.VISIBLE
+
+                lossMsg.visibility = View.VISIBLE
             }
         }
     }
