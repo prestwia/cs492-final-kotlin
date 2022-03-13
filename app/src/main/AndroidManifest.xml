@@ -22,6 +22,10 @@
              android:exported="true"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.WOTDActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">

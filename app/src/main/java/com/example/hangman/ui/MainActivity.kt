@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         buttonWOTD?.setOnClickListener(){
-            val intent = Intent(this, GameActivity::class.java)
+            val intent = Intent(this, WOTDActivity::class.java)
             startActivity(intent)
         }
     }
