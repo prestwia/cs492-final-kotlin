@@ -14,12 +14,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.preference.PreferenceManager
 import com.example.hangman.R
 import com.example.hangman.data.LoadingStatus
 import com.google.android.material.progressindicator.CircularProgressIndicator
-import android.view.inputmethod.InputMethodManager
 
 
 class GameActivity: AppCompatActivity() {
