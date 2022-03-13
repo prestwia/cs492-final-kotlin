@@ -17,7 +17,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="pref_category_hangman">Hangman Game Settings</string>
+    <string name="pref_category_hangman">Game Settings</string>
 
     <string name="pref_tries_title">Number of guesses per game</string>
     <string name="pref_letter_count_title">Max number of letters per word</string>
