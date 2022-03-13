@@ -1,5 +1,6 @@
 package com.example.hangman.ui
 
+import android.app.Activity
 import android.app.SearchManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -13,10 +14,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.preference.PreferenceManager
 import com.example.hangman.R
 import com.example.hangman.data.LoadingStatus
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import android.view.inputmethod.InputMethodManager
 
 
 class GameActivity: AppCompatActivity() {
@@ -31,6 +34,7 @@ class GameActivity: AppCompatActivity() {
     private lateinit var buttonMenu : Button
     private lateinit var guessPrompt: TextView
     private lateinit var incorrectGuess: TextView
+    private lateinit var guessesLeft: TextView
     private lateinit var lossMsg: TextView
     private lateinit var winMsg: TextView
 
@@ -60,14 +64,15 @@ class GameActivity: AppCompatActivity() {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
         //Buttons
-        buttonPlayAgain = findViewById<Button>(R.id.btn_play_again)
-        buttonDefine = findViewById<Button>(R.id.btn_define)
-        buttonMenu = findViewById<Button>(R.id.btn_menu)
+        buttonPlayAgain = findViewById(R.id.btn_play_again)
+        buttonDefine = findViewById(R.id.btn_define)
+        buttonMenu = findViewById(R.id.btn_menu)
 
         displayTV = findViewById(R.id.display_word)
         guessBtn = findViewById(R.id.guess_button)
         guessET = findViewById(R.id.guess_text)
         displayIncorrectTV = findViewById(R.id.incorrect_guesses)
+        guessesLeft = findViewById(R.id.guesses_left)
 
         //Textview of the display word
         val displayTV : TextView = findViewById(R.id.display_word)
@@ -97,18 +102,14 @@ class GameActivity: AppCompatActivity() {
         viewModel.loadReqResult(wordLength, WORDNIK_API_KEY)
         viewModel.wordResult.observe(this) { word ->
             if(word != null){
-                Log.d("tag", word)
-                
-                answer = word
+                answer = word.lowercase()
+                Log.d("tag", answer)
 
                 display = toUnderscore(word)
                 Log.d("tag-display", display)
                 displayTV.text = display
             }
         }
-        // set gameResult to int so that it can hide the end game buttons.
-//        gameResult=1
-
         //Loading + error indicators
         viewModel.loadingStatus.observe(this) { uiState ->
             when (uiState) {
@@ -121,6 +122,9 @@ class GameActivity: AppCompatActivity() {
                     displayTV.visibility = View.INVISIBLE
                     guessBtn.visibility = View.INVISIBLE
                     guessET.visibility = View.INVISIBLE
+                    guessPrompt.visibility= View.INVISIBLE
+                    incorrectGuess.visibility= View.INVISIBLE
+                    guessesLeft.visibility = View.INVISIBLE
                 }
                 LoadingStatus.ERROR -> {
                     buttonPlayAgain.visibility = View.VISIBLE
@@ -131,27 +135,11 @@ class GameActivity: AppCompatActivity() {
                     displayTV.visibility = View.INVISIBLE
                     guessBtn.visibility = View.INVISIBLE
                     guessET.visibility = View.INVISIBLE
+                    guessPrompt.visibility= View.INVISIBLE
+                    incorrectGuess.visibility= View.INVISIBLE
+                    guessesLeft.visibility = View.INVISIBLE
                 }
-//                LoadingStatus.SUCCESS->{
-//                    buttonPlayAgain.visibility = View.INVISIBLE
-//                    buttonDefine.visibility = View.INVISIBLE
-//                    buttonMenu.visibility = View.INVISIBLE
-//                    loadingIndicator.visibility = View.INVISIBLE
-//                    apiErrorTV.visibility = View.INVISIBLE
-//                }
-
                 else -> {
-//                    Log.d("tag-guess", "inside else statement for loading status")
-                    //testing here for a minute
-//                    when(gameResult){
-//                        is String -> {
-//                            buttonPlayAgain.visibility = View.VISIBLE
-//                            buttonDefine.visibility = View.INVISIBLE
-//                            buttonMenu.visibility = View.INVISIBLE
-//                            loadingIndicator.visibility = View.INVISIBLE
-//                            apiErrorTV.visibility = View.INVISIBLE}
-//
-//                    }
 
                     buttonPlayAgain.visibility = View.INVISIBLE
                     buttonDefine.visibility = View.INVISIBLE
@@ -161,18 +149,28 @@ class GameActivity: AppCompatActivity() {
                     displayTV.visibility = View.VISIBLE
                     guessBtn.visibility = View.VISIBLE
                     guessET.visibility = View.VISIBLE
+                    guessPrompt.visibility= View.VISIBLE
+                    incorrectGuess.visibility= View.VISIBLE
+                    guessesLeft.visibility = View.VISIBLE
+
+                    guessET.requestFocus()
+                    guessET.showKeyboard()
+
                 }
             }
         }
 
+        //initially set textview for guesses left
+        guessesLeft.text = getString(R.string.guesses_left, gameTries)
+
         //Button listeners
-        buttonPlayAgain?.setOnClickListener(){
+        buttonPlayAgain.setOnClickListener(){
             val intent = Intent(this, GameActivity::class.java)
             finish()
             startActivity(intent)
 
         }
-        buttonDefine?.setOnClickListener(){
+        buttonDefine.setOnClickListener(){
             val intent = Intent(Intent.ACTION_WEB_SEARCH).apply {
                 putExtra(
                     SearchManager.QUERY, getString(
@@ -187,7 +185,7 @@ class GameActivity: AppCompatActivity() {
             }
 
         }
-        buttonMenu?.setOnClickListener(){
+        buttonMenu.setOnClickListener(){
             val intent = Intent(this, MainActivity::class.java)
             finish()
             startActivity(intent)
@@ -219,46 +217,39 @@ class GameActivity: AppCompatActivity() {
     // add game status function before make guess to generate a end of game status that turns
     // the end game buttons from invisible to visible
 
-    //    private fun gameStatusButtons(win: String){
-//        if (win== Winner){
-//              visibility of the 3 buttons here.
-//        }
-//        else{
-//                  user has lost
-//        }
-//    }
-                            // user settings global
     private fun gameWinner(tries: Int, word: String, curGuess:String){
-//        1 user runs out of tries -- user loses
-//         user wins
-//          and Tries!=0
         if (word==curGuess)
         {
 //            Log.d("gameWin", "user wins")
+            displayTV.text = answer
             displayTV.visibility = View.VISIBLE
             guessBtn.visibility = View.INVISIBLE
             guessET.visibility = View.INVISIBLE
             guessPrompt.visibility= View.INVISIBLE
             incorrectGuess.visibility= View.INVISIBLE
-
             buttonPlayAgain.visibility = View.VISIBLE
             buttonDefine.visibility = View.VISIBLE
             buttonMenu.visibility = View.VISIBLE
-
+            guessesLeft.visibility = View.INVISIBLE
+            displayIncorrectTV.visibility = View.INVISIBLE
+            this.hideKeyboard()
             winMsg.visibility = View.VISIBLE
+          
         } else {
             if (tries==0){
-
 //                Log.d("testgamewiner", "in the else")
+                displayTV.text = answer
                 displayTV.visibility = View.VISIBLE
                 guessBtn.visibility = View.INVISIBLE
+                this.hideKeyboard()
                 guessET.visibility = View.INVISIBLE
                 guessPrompt.visibility= View.INVISIBLE
                 incorrectGuess.visibility= View.INVISIBLE
                 buttonPlayAgain.visibility = View.VISIBLE
                 buttonDefine.visibility = View.VISIBLE
                 buttonMenu.visibility = View.VISIBLE
-
+                guessesLeft.visibility = View.INVISIBLE
+                displayIncorrectTV.visibility = View.INVISIBLE
                 lossMsg.visibility = View.VISIBLE
             }
         }
@@ -290,17 +281,13 @@ class GameActivity: AppCompatActivity() {
             displayTV.text = display
             Log.d("tag-guess", "New String: $new_display")
             // SET game result to string so it displays the end game buttons.
-//            if tries is less than total tries OR display==wordFromAPI
-//                    User Won
-//            else user Lost
-//            gameResult="WINNER"
         }
         else {
             incorrectGuesses += guess
             displayIncorrectTV.text = incorrectGuesses
             Log.d("tag-guess", "Incorrect: $incorrectGuesses")
             gameTries-=1
-
+            guessesLeft.text = getString(R.string.guesses_left, gameTries)
         }
     }
 
@@ -313,5 +300,16 @@ class GameActivity: AppCompatActivity() {
         }
 
         return temp
+    }
+
+    //https://stackoverflow.com/questions/1109022/how-do-you-close-hide-the-android-soft-keyboard-programmatically
+    fun Activity.hideKeyboard(): Boolean {
+        return (getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .hideSoftInputFromWindow((currentFocus ?: View(this)).windowToken, 0)
+    }
+
+    fun EditText.showKeyboard(): Boolean {
+        return (context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .showSoftInput(this, 0)
     }
 }
