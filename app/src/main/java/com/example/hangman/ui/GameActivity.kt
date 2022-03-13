@@ -196,6 +196,7 @@ class GameActivity: AppCompatActivity() {
             if (guess != "") {
                 // don't allow user to re-guess letter
                 if (incorrectGuesses.contains(guess) || display.contains(guess)) {
+                    guessET.getText().clear();
                     Toast.makeText(this, "Letter already guessed. Try Again", Toast.LENGTH_SHORT).show()
                 }
                 else {
