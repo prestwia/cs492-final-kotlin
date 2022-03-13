@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Hangman</string>
+    <string name="app_name">Gibbet</string>
 
 <!--Buttons and their strings-->
 
@@ -20,7 +20,7 @@
     <string name="pref_category_hangman">Hangman Game Settings</string>
 
     <string name="pref_tries_title">Number of guesses per game</string>
-    <string name="pref_letter_count_title">Number of letters for word</string>
+    <string name="pref_letter_count_title">Max number of letters per word</string>
 
     <string name="pref_tries_key" translatable="false">tries</string>
     <string name="pref_letter_count_key" translatable="false">maxLength</string>
