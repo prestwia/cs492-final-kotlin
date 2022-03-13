@@ -24,6 +24,11 @@ class GameActivity: AppCompatActivity() {
     private lateinit var guessBtn : Button
     private lateinit var displayTV : TextView
     private lateinit var displayIncorrectTV : TextView
+    private lateinit var buttonPlayAgain : Button
+    private lateinit var buttonDefine : Button
+    private lateinit var buttonMenu : Button
+    private lateinit var guessPrompt: TextView
+    private lateinit var incorrectGuess: TextView
 
     //Loading and error variables
     private lateinit var apiErrorTV: TextView
@@ -37,6 +42,11 @@ class GameActivity: AppCompatActivity() {
     private lateinit var display : String
     private var incorrectGuesses = ""
 
+    //Game Status?
+    private lateinit var gameResult: String
+
+    // user globals from settings
+    private var gameTries: Int = 6
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +56,9 @@ class GameActivity: AppCompatActivity() {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
         //Buttons
-        val buttonPlayAgain = findViewById<Button>(R.id.btn_play_again)
-        val buttonDefine = findViewById<Button>(R.id.btn_define)
-        val buttonMenu = findViewById<Button>(R.id.btn_menu)
+        buttonPlayAgain = findViewById<Button>(R.id.btn_play_again)
+        buttonDefine = findViewById<Button>(R.id.btn_define)
+        buttonMenu = findViewById<Button>(R.id.btn_menu)
 
         displayTV = findViewById(R.id.display_word)
         guessBtn = findViewById(R.id.guess_button)
@@ -61,10 +71,13 @@ class GameActivity: AppCompatActivity() {
         //Set Loading & Error variables
         apiErrorTV = findViewById(R.id.tv_api_error)
         loadingIndicator = findViewById(R.id.loading_indicator)
-        
+
+        //prompts
+        guessPrompt= findViewById(R.id.incorrect_guess_prompt)
+        incorrectGuess= findViewById(R.id.guess_prompt)
         //Preference stuff
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val gameTries = sharedPrefs.getInt(
+        gameTries = sharedPrefs.getInt(
             getString(R.string.pref_tries_key),
             6
         )
@@ -86,6 +99,8 @@ class GameActivity: AppCompatActivity() {
                 displayTV.text = display
             }
         }
+        // set gameResult to int so that it can hide the end game buttons.
+//        gameResult=1
 
         //Loading + error indicators
         viewModel.loadingStatus.observe(this) { uiState ->
@@ -96,6 +111,9 @@ class GameActivity: AppCompatActivity() {
                     buttonMenu.visibility = View.INVISIBLE
                     loadingIndicator.visibility = View.VISIBLE
                     apiErrorTV.visibility = View.INVISIBLE
+                    displayTV.visibility = View.INVISIBLE
+                    guessBtn.visibility = View.INVISIBLE
+                    guessET.visibility = View.INVISIBLE
                 }
                 LoadingStatus.ERROR -> {
                     buttonPlayAgain.visibility = View.VISIBLE
@@ -103,13 +121,39 @@ class GameActivity: AppCompatActivity() {
                     buttonMenu.visibility = View.VISIBLE
                     loadingIndicator.visibility = View.INVISIBLE
                     apiErrorTV.visibility = View.VISIBLE
+                    displayTV.visibility = View.INVISIBLE
+                    guessBtn.visibility = View.INVISIBLE
+                    guessET.visibility = View.INVISIBLE
                 }
+//                LoadingStatus.SUCCESS->{
+//                    buttonPlayAgain.visibility = View.INVISIBLE
+//                    buttonDefine.visibility = View.INVISIBLE
+//                    buttonMenu.visibility = View.INVISIBLE
+//                    loadingIndicator.visibility = View.INVISIBLE
+//                    apiErrorTV.visibility = View.INVISIBLE
+//                }
+
                 else -> {
-                    buttonPlayAgain.visibility = View.VISIBLE
-                    buttonDefine.visibility = View.VISIBLE
-                    buttonMenu.visibility = View.VISIBLE
+//                    Log.d("tag-guess", "inside else statement for loading status")
+                    //testing here for a minute
+//                    when(gameResult){
+//                        is String -> {
+//                            buttonPlayAgain.visibility = View.VISIBLE
+//                            buttonDefine.visibility = View.INVISIBLE
+//                            buttonMenu.visibility = View.INVISIBLE
+//                            loadingIndicator.visibility = View.INVISIBLE
+//                            apiErrorTV.visibility = View.INVISIBLE}
+//
+//                    }
+
+                    buttonPlayAgain.visibility = View.INVISIBLE
+                    buttonDefine.visibility = View.INVISIBLE
+                    buttonMenu.visibility = View.INVISIBLE
                     loadingIndicator.visibility = View.INVISIBLE
                     apiErrorTV.visibility = View.INVISIBLE
+                    displayTV.visibility = View.VISIBLE
+                    guessBtn.visibility = View.VISIBLE
+                    guessET.visibility = View.VISIBLE
                 }
             }
         }
@@ -147,16 +191,65 @@ class GameActivity: AppCompatActivity() {
             val guess = guessET.text.toString()
             if (guess != "") {
                 makeGuess(guess)
+                // tries = 10
+                gameWinner(gameTries,answer, display);
                 guessET.getText().clear();
             }
             else {
                 Toast.makeText(this, "Enter a guess (Letter)", Toast.LENGTH_SHORT).show()
             }
         }
+
+    } // end onCreate
+
+    // add game status function before make guess to generate a end of game status that turns
+    // the end game buttons from invisible to visible
+
+    //    private fun gameStatusButtons(win: String){
+//        if (win== Winner){
+//              visibility of the 3 buttons here.
+//        }
+//        else{
+//                  user has lost
+//        }
+//    }
+                            // user settings global
+    private fun gameWinner(tries: Int, word: String, curGuess:String){
+//        1 user runs out of tries -- user loses
+//         user wins
+//          and Tries!=0
+        if (word==curGuess)
+        {
+//            Log.d("gameWin", "user wins")
+            displayTV.visibility = View.VISIBLE
+            guessBtn.visibility = View.INVISIBLE
+            guessET.visibility = View.INVISIBLE
+            guessPrompt.visibility= View.INVISIBLE
+            incorrectGuess.visibility= View.INVISIBLE
+
+            buttonPlayAgain.visibility = View.VISIBLE
+            buttonDefine.visibility = View.VISIBLE
+            buttonMenu.visibility = View.VISIBLE
+        } else {
+            if (tries==0){
+
+//                Log.d("testgamewiner", "in the else")
+                displayTV.visibility = View.VISIBLE
+                guessBtn.visibility = View.INVISIBLE
+                guessET.visibility = View.INVISIBLE
+                guessPrompt.visibility= View.INVISIBLE
+                incorrectGuess.visibility= View.INVISIBLE
+                buttonPlayAgain.visibility = View.VISIBLE
+                buttonDefine.visibility = View.VISIBLE
+                buttonMenu.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun makeGuess(guess : String) {
         Log.d("tag-guess", "Guess: $guess")
+        Log.d("numSettings", "tries: $gameTries")
+
         if (answer.contains(guess)) {
             val index = mutableListOf<Int>()
             /* get indexes of all chars that are the same as guess */
@@ -178,11 +271,18 @@ class GameActivity: AppCompatActivity() {
             display = new_display
             displayTV.text = display
             Log.d("tag-guess", "New String: $new_display")
+            // SET game result to string so it displays the end game buttons.
+//            if tries is less than total tries OR display==wordFromAPI
+//                    User Won
+//            else user Lost
+//            gameResult="WINNER"
         }
         else {
             incorrectGuesses += guess
             displayIncorrectTV.text = incorrectGuesses
             Log.d("tag-guess", "Incorrect: $incorrectGuesses")
+            gameTries-=1
+
         }
     }
 
