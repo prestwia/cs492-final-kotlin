@@ -222,6 +222,7 @@ class GameActivity: AppCompatActivity() {
             displayTV.text = answer
             displayTV.visibility = View.VISIBLE
             guessBtn.visibility = View.INVISIBLE
+            this.hideKeyboard()
             guessET.visibility = View.INVISIBLE
             guessPrompt.visibility= View.INVISIBLE
             incorrectGuess.visibility= View.INVISIBLE
@@ -230,7 +231,6 @@ class GameActivity: AppCompatActivity() {
             buttonMenu.visibility = View.VISIBLE
             guessesLeft.visibility = View.INVISIBLE
             displayIncorrectTV.visibility = View.INVISIBLE
-            this.hideKeyboard()
             winMsg.visibility = View.VISIBLE
           
         } else {

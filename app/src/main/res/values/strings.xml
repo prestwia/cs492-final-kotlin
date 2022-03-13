@@ -27,6 +27,7 @@
 
 <!--    Game activity strings-->
 
+    <string name="guess_hint">Type a letter...</string>
     <string name="end_game">End game</string>
     <string name="guess_prompt">Guess: </string>
     <string name="guess_button">Make Guess</string>

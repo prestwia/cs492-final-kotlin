@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/mountainbackground_1"
     tools:context=".ui.GameActivity"
     android:padding="5dp">
 
@@ -53,7 +54,7 @@
         android:id="@+id/guess_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/app_name"
+        android:hint="@string/guess_hint"
         android:maxLength="1"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/incorrect_guess_prompt"
@@ -90,8 +91,10 @@
 
     <Button
         android:id="@+id/guess_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="68dp"
+        android:textSize="16sp"
+        android:layout_marginVertical="48dp"
         android:text="@string/guess_button"
         app:layout_constraintTop_toBottomOf="@+id/guesses_left"
         app:layout_constraintLeft_toLeftOf="parent"
