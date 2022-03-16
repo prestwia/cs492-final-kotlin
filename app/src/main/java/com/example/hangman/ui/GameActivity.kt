@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.SearchManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -50,6 +51,9 @@ class GameActivity: AppCompatActivity() {
 
     // user globals from settings
     private var gameTries: Int = 6
+
+    // test game sound
+    var mMediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -210,6 +214,12 @@ class GameActivity: AppCompatActivity() {
 
     } // end onCreate
 
+    //Stop the sound when moving to a different activity
+    override fun onPause() {
+        super.onPause()
+        mMediaPlayer!!.stop()
+    }
+
     // add game status function before make guess to generate a end of game status that turns
     // the end game buttons from invisible to visible
 
@@ -217,6 +227,7 @@ class GameActivity: AppCompatActivity() {
         if (word==curGuess)
         {
 //            Log.d("gameWin", "user wins")
+            //playWinSound()
             displayTV.text = answer
             displayTV.visibility = View.VISIBLE
             guessBtn.visibility = View.INVISIBLE
@@ -234,6 +245,7 @@ class GameActivity: AppCompatActivity() {
         } else {
             if (tries==0){
 //                Log.d("testgamewiner", "in the else")
+                playLoseSound()
                 displayTV.text = answer
                 displayTV.visibility = View.VISIBLE
                 guessBtn.visibility = View.INVISIBLE
@@ -298,6 +310,13 @@ class GameActivity: AppCompatActivity() {
         return temp
     }
 
+    fun playLoseSound(){
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(this, R.raw.losehorn)
+            mMediaPlayer!!.isLooping = false
+            mMediaPlayer!!.start()
+        } else mMediaPlayer!!.start()
+    }
     //https://stackoverflow.com/questions/1109022/how-do-you-close-hide-the-android-soft-keyboard-programmatically
     private fun Activity.hideKeyboard(): Boolean {
         return (getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)

@@ -3,22 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="@string/pref_category_hangman">
+    <PreferenceCategory
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:title="@string/pref_category_hangman">
         <SeekBarPreference
-            android:title="@string/pref_tries_title"
+            android:defaultValue="6"
             android:key="@string/pref_tries_key"
             android:max="12"
+            android:title="@string/pref_tries_title"
             app:min="6"
-            android:defaultValue="6"
-            app:showSeekBarValue="true"/>
+            app:showSeekBarValue="true" />
 
         <SeekBarPreference
-            android:title="@string/pref_letter_count_title"
+            android:defaultValue="5"
             android:key="@string/pref_letter_count_key"
             android:max="10"
+            android:title="@string/pref_letter_count_title"
             app:min="5"
-            android:defaultValue="5"
-            app:showSeekBarValue="true"/>
+            app:showSeekBarValue="true" />
+
+
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -7,35 +7,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    <Button-->
-<!--        android:id="@+id/back_button"-->
-<!--        android:layout_width="30dp"-->
-<!--        android:layout_height="30dp"-->
-<!--        android:drawable="@drawable/ic_back_arrow"-->
-<!--        android:layout_margin="15dp"-->
-<!--        android:background="?attr/selectableItemBackground"-->
-
-<!--         />-->
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/back_button"
         android:layout_width="38dp"
         android:layout_height="38dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center"
         app:icon="@drawable/ic_back_arrow"
-        app:iconTint="@color/black"
         app:iconGravity="textStart"
         app:iconPadding="4dp"
-        android:gravity="center"
-        android:layout_margin="12dp"
-        android:background="?attr/selectableItemBackground"
-        />
+        app:iconTint="@color/black" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/mountainbackground_1"
         android:id="@+id/settings_fragment"
         android:name="com.example.hangman.ui.SettingsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mountainbackground_1"
         tools:context=".ui.SettingsActivity" />
 
 </RelativeLayout>
