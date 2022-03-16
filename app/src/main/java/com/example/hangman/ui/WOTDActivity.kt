@@ -217,7 +217,9 @@ class WOTDActivity: AppCompatActivity() {
     //Stop the sound when moving to a different activity
     override fun onPause() {
         super.onPause()
-        mMediaPlayer!!.stop()
+        if(mMediaPlayer != null){
+            mMediaPlayer!!.stop()
+        }
     }
 
     // add game status function before make guess to generate a end of game status that turns

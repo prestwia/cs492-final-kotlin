@@ -12,7 +12,6 @@
     <TextView
         android:id="@+id/display_word"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
@@ -47,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/guess_prompt"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/display_word"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
@@ -55,8 +55,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/guess_hint"
+        android:textColorHint="#707070"
         android:maxLength="1"
         android:minHeight="48dp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/incorrect_guess_prompt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guess_prompt" />
@@ -66,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/incorrect_guesses"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/guess_text"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
 
