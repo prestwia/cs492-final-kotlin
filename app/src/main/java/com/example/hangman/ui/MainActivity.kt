@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
         //Buttons
         val buttonPlay = findViewById<Button>(R.id.button_play)
@@ -35,5 +34,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, WOTDActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 }

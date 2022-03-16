@@ -11,7 +11,6 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
         //Back Button
         val backButton = findViewById<MaterialButton>(R.id.back_button)
@@ -20,5 +19,10 @@ class SettingsActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 }

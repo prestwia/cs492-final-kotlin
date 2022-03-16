@@ -48,9 +48,6 @@ class WOTDActivity: AppCompatActivity() {
     private lateinit var display : String
     private var incorrectGuesses = ""
 
-    //Game Status?
-    private lateinit var gameResult: String
-
     // user globals from settings
     private var gameTries: Int = 6
 
@@ -271,14 +268,14 @@ class WOTDActivity: AppCompatActivity() {
                 Log.d("tag-guess", "Index: $i")
             }
 
-            var new_display = display
+            var newDisplay = display
             /* construct new display string */
             for (i in index) {
-                 new_display= new_display.substring(0, i) + guess + new_display.substring(i + 1)
+                 newDisplay= newDisplay.substring(0, i) + guess + newDisplay.substring(i + 1)
             }
-            display = new_display
+            display = newDisplay
             displayTV.text = display
-            Log.d("tag-guess", "New String: $new_display")
+            Log.d("tag-guess", "New String: $newDisplay")
             // SET game result to string so it displays the end game buttons.
         }
         else {
@@ -292,7 +289,7 @@ class WOTDActivity: AppCompatActivity() {
 
     private fun toUnderscore(original : String) : String {
         val length = original.length
-        var temp : String = ""
+        var temp = ""
 
         for (i in 1..length) {
             temp += "_"
@@ -302,12 +299,12 @@ class WOTDActivity: AppCompatActivity() {
     }
 
     //https://stackoverflow.com/questions/1109022/how-do-you-close-hide-the-android-soft-keyboard-programmatically
-    fun Activity.hideKeyboard(): Boolean {
+    private fun Activity.hideKeyboard(): Boolean {
         return (getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
             .hideSoftInputFromWindow((currentFocus ?: View(this)).windowToken, 0)
     }
 
-    fun EditText.showKeyboard(): Boolean {
+    private fun EditText.showKeyboard(): Boolean {
         return (context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
             .showSoftInput(this, 0)
     }
